@@ -14,10 +14,11 @@ export class UserDatabase extends BaseDatabase {
         },
     });
 
-    private static TABLE_NAME = "User_cookenu";
+    private static TABLE_NAME = "Cookenu_user";
 
     public async createUser(
         id: string,
+        name: string,
         email: string,
         password: string,
         role: string
@@ -25,6 +26,7 @@ export class UserDatabase extends BaseDatabase {
         await this.getConnection()
             .insert({
                 id,
+                name,
                 email,
                 password,
                 role
