@@ -18,6 +18,7 @@ export class UserDatabase extends BaseDatabase {
 
     public async createUser(
         id: string,
+        name: string,
         email: string,
         password: string,
         role: string
@@ -25,6 +26,7 @@ export class UserDatabase extends BaseDatabase {
         await this.getConnection()
             .insert({
                 id,
+                name,
                 email,
                 password,
                 role
