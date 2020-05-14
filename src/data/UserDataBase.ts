@@ -1,5 +1,4 @@
 import knex from "knex";
-import { promises } from "dns";
 import { BaseDatabase } from "./BaseDataBase";
 
 export class UserDatabase extends BaseDatabase {
@@ -31,13 +30,22 @@ export class UserDatabase extends BaseDatabase {
 
         return result[0];
     }
-
-    public async getUserById(id: string): Promise<any> {
+  
+    public async getOwnProfile(id: string): Promise <any> {
         const result = await this.getConnection()
-            .select("*")
-            .from(UserDatabase.TABLE_NAME)
-            .where({ id });
-        console.log(result[0])
-        return result[0];
+        .select("*")
+        .from(UserDatabase.TABLE_NAME)
+        .where({ id })
+
+        return result [0]
+    }
+
+    public async getOtherProfile(id: string): Promise <any> {
+        const result = await this.getConnection()
+        .select("*")
+        .from(UserDatabase.TABLE_NAME)
+        .where({ id })
+
+        return result [0]
     }
 }
