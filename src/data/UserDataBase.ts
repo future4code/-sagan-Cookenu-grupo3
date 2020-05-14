@@ -2,17 +2,6 @@ import knex from "knex";
 import { BaseDatabase } from "./BaseDataBase";
 
 export class UserDatabase extends BaseDatabase {
-    private connection = knex({
-        client: "mysql",
-        connection: {
-            host: process.env.DB_HOST,
-            port: 3306,
-            user: process.env.DB_USER,
-            password: process.env.DB_PASSWORD,
-            database: process.env.DB_DATABASE_NAME,
-        },
-    });
-
     private static TABLE_NAME = "Cookenu_user";
 
     public async createUser(
@@ -41,7 +30,7 @@ export class UserDatabase extends BaseDatabase {
 
         return result[0];
     }
-
+  
     public async getOwnProfile(id: string): Promise <any> {
         const result = await this.getConnection()
         .select("*")
