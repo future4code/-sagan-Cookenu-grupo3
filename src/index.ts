@@ -4,16 +4,15 @@ dotenv.config()
 import express from "express";
 import { AddressInfo } from "net";
 import { signupEndPoint } from "./endpoints/signupEndPoint";
-
-
+import { loginEndpoint } from "./endpoints/loginEndpoint";
+import { createRecipeEndPoint } from "./endpoints/createRecipeEndpoint";
 
 const app = express();
-
 app.use(express.json());
 
-
 app.post("/signup", signupEndPoint)
-
+app.post("/login", loginEndpoint)
+app.post("/recipes/create", createRecipeEndPoint)
 
 const server = app.listen(process.env.PORT || 3000, () => {
     if (server) {
