@@ -50,4 +50,13 @@ export class UserDatabase extends BaseDatabase {
 
         return result [0]
     }
+
+    public async getOtherProfile(id: string): Promise <any> {
+        const result = await this.getConnection()
+        .select("*")
+        .from(UserDatabase.TABLE_NAME)
+        .where({ id })
+
+        return result [0]
+    }
 }

@@ -4,8 +4,9 @@ dotenv.config()
 import express from "express";
 import { AddressInfo } from "net";
 import { signupEndPoint } from "./endpoints/signupEndPoint";
-import { getOwnProfileEndPoint } from "./endpoints/getOwProfileEndpoint";
+import { getOwnProfileEndPoint } from "./endpoints/getOwnProfileEndpoint";
 import { loginEndpoint } from "./endpoints/loginEndpoint";
+import { getOtherProfileEndPoint } from "./endpoints/getOtherProfileUserEndpoint";
 
 
 
@@ -18,6 +19,8 @@ app.post("/signup", signupEndPoint)
 app.post("/login", loginEndpoint)
 
 app.get("/user/profile", getOwnProfileEndPoint)
+app.get("/user/:id", getOtherProfileEndPoint)
+
 
 const server = app.listen(process.env.PORT || 3000, () => {
     if (server) {
