@@ -12,6 +12,7 @@ import { loginEndpoint } from "./endpoints/loginEndpoint";
 import { createRecipeEndPoint } from "./endpoints/createRecipeEndpoint";
 import { getRecipeEndPoint } from "./endpoints/getRecipeEndPoint";
 import { followUserEndPoint } from "./endpoints/followUserEndpoint";
+import { unfolowUserEndPoint } from "./endpoints/unfollowUserEndpoint";
 
 const app = express();
 app.use(express.json());
@@ -19,6 +20,7 @@ app.use(express.json());
 app.post("/signup", signupEndPoint)
 app.post("/login", loginEndpoint)
 app.post("/user/follow", followUserEndPoint)
+app.post("/user/unfollow", unfolowUserEndPoint)
 
 app.get("/user/profile", getOwnProfileEndPoint)
 app.get("/user/:id", getOtherProfileEndPoint)
