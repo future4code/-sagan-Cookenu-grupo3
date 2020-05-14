@@ -25,6 +25,15 @@ export class Authenticator {
     };
     return result;
   }
+  
+  public verify(token: string): AuthenticationData {
+        const data = jwt.verify(token, process.env.JWT_KEY as string) as any;
+        return {
+            id: data.id,
+            role: data.role
+        }
+    }
+
 }
 
 interface AuthenticationData {

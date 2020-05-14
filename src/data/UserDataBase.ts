@@ -1,5 +1,4 @@
 import knex from "knex";
-import { promises } from "dns";
 import { BaseDatabase } from "./BaseDataBase";
 
 export class UserDatabase extends BaseDatabase {
@@ -41,5 +40,14 @@ export class UserDatabase extends BaseDatabase {
             .where({ email });
 
         return result[0];
+    }
+
+    public async getOwnProfile(id: string): Promise <any> {
+        const result = await this.getConnection()
+        .select("*")
+        .from(UserDatabase.TABLE_NAME)
+        .where({ id })
+
+        return result [0]
     }
 }
