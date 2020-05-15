@@ -2,20 +2,15 @@ import { Request, Response } from "express";
 import { UserDatabase } from "../data/UserDataBase";
 import { Authenticator } from "../services/Authenticator";
 
-
 export const unfolowUserEndPoint = async (req: Request, res: Response) => {
     try {
         const token = req.headers.authorization as string;
+        const authenticationData = new Authenticator().getData(token);
 
-        const authenticator = new Authenticator()
-        const authenticationData = authenticator.getData(token);
-
-        if(!req.body.followed_id){
-            throw new Error("Need to send an Id to unfollow")
+        if (!req.body.followed_id) {
+            throw new Error("Need to send an Id to unfollow someone")
         }
-        
-        const unfollowUser = new UserDatabase()
-        await unfollowUser.deleteFollowUser(authenticationData.id, req.body.followed_id)
+        await new UserDatabase().deleteFollowUser(authenticationData.id, req.body.followed_id)
 
         res.status(200).send({
             message: "Unfollowed successfully"

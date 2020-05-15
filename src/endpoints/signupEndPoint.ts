@@ -5,7 +5,6 @@ import { HashManager } from "../services/HashManager";
 import { IdGenerator } from "../services/IdGenerator";
 import { Authenticator } from "../services/Authenticator";
 
-
 export const signupEndPoint = async (req: Request, res: Response) => {
     try {
         if (!req.body.name) {
@@ -15,26 +14,18 @@ export const signupEndPoint = async (req: Request, res: Response) => {
             throw new Error("Invalid email");
         }
         if (!req.body.password || req.body.password.length < 6) {
-            throw new Error("Invalid password");
+            throw new Error("Password too short");
         }
         const user = {
             name: req.body.name,
             email: req.body.email,
             password: req.body.password,
             role: req.body.role
-
         };
-        const idGenerator = new IdGenerator();
-        const id = idGenerator.generate();
-
-        const hashManager = new HashManager();
-        const hashPassword = await hashManager.hash(user.password)
-
-        const userDataBase = new UserDatabase()
-        await userDataBase.createUser(id, user.name, user.email, hashPassword, user.role);
-
-        const authenticator = new Authenticator();
-        const token = authenticator.generateToken({
+        const id = await new IdGenerator().generate();
+        const hashPassword = await new HashManager().hash(user.password)
+        await new UserDatabase().createUser(id, user.name, user.email, hashPassword, user.role);
+        const token = new Authenticator().generateToken({
             id,
             role: user.role,
         })

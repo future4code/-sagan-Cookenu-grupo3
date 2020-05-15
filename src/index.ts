@@ -22,13 +22,11 @@ app.post("/signup", signupEndPoint)
 app.post("/login", loginEndpoint)
 
 app.post("/user/follow", followUserEndPoint)
-
-app.delete("/user/delete/:id", deleteUserEndPoint)
-
 app.post("/user/unfollow", unfolowUserEndPoint)
 app.get("/user/profile", getOwnProfileEndPoint)
 app.get("/user/:id", getOtherProfileEndPoint)
 app.get("/user/feed", feedEndPoint)
+app.delete("/user/delete/:id", deleteUserEndPoint)
 
 app.post("/recipes/create", createRecipeEndPoint)
 app.get("/recipes/:id", getRecipeEndPoint)

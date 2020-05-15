@@ -3,20 +3,16 @@ import { BaseDatabase } from "../data/BaseDataBase";
 import { UserDatabase } from "../data/UserDataBase";
 import { Authenticator } from "../services/Authenticator";
 
-
 export const deleteUserEndPoint = async (req: Request, res: Response) => {
     try {
         const token = req.headers.authorization as string
-
-        const authenticator = new Authenticator()
-        const authenticationData = authenticator.getData(token);
+        const authenticationData = new Authenticator().getData(token);
 
         if (authenticationData.role !== "admin") {
-            throw new Error("Unauthorized, only admin can delete")
+            throw new Error("Unauthorized, only admin can delete a user")
         }
 
-        const deleUserData = new UserDatabase()
-        await deleUserData.deleteUser(authenticationData.id)
+        await new UserDatabase().deleteUser(authenticationData.id)
 
         res.status(200).send()
     } catch (err) {

@@ -7,10 +7,10 @@ export const feedEndPoint = async (req: Request, res: Response) => {
     try {
         const token = req.headers.authorization as string;
         const userData = await new Authenticator().getData(token);
-        const recipes = await new RecipesDataBase().getFeed(userData.id)
+        const recipesFeed = await new RecipesDataBase().getFeed(userData.id)
 
         res.status(200).send({
-            recipes
+            recipesFeed
         })
     } catch (err) {
         res.status(400).send({

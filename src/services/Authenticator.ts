@@ -25,8 +25,6 @@ export class Authenticator {
     };
     return result;
   }
-  
-
 }
 
 interface AuthenticationData {

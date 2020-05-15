@@ -7,7 +7,7 @@ export const createRecipeEndPoint = async (req: Request, res: Response) => {
     try {
         const token = req.headers.authorization as string;
         const userData = await new Authenticator().getData(token);
-        const createNewRecipe = await new RecipesDataBase().createRecipe(
+        await new RecipesDataBase().createRecipe(
             Date.now(),
             req.body.title,
             req.body.description,

@@ -49,19 +49,19 @@ export class UserDatabase extends BaseDatabase {
             .insert({
                 follower_id,
                 followed_id
-            }).into("FollowUsers");
+            }).into(BaseDatabase.FOLLOWS_TABLE_NAME);
     }
     public async deleteFollowUser(follower_id: string, followed_id: string): Promise<any> {
         await this.getConnection()
             .delete()
-            .from("FollowUsers")
+            .from(BaseDatabase.FOLLOWS_TABLE_NAME)
             .where({ follower_id, followed_id })
 
     };
     public async deleteUser(id: string): Promise<any> {
         await this.getConnection()
             .delete()
-            .from(UserDatabase.TABLE_NAME)
+            .from(BaseDatabase.USERS_TABLE_NAME)
             .where({ id })
     };
 }

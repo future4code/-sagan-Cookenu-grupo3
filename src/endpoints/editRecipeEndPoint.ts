@@ -9,9 +9,9 @@ export const editRecipeEndPoint = async (req: Request, res: Response) => {
         const userData = await new Authenticator().getData(token);
         const recipeOwner = await new RecipesDataBase().getRecipeCreatorByRecipeId(Number(req.params.id))
         if (recipeOwner != userData.id) {
-            throw new Error("Você precisa ser o criador da receita para poder atualiza-la.")
+            throw new Error("Unauthorized. You need to be a recipe Creator to update this recipe.")
         }
-        const updateRecipe = await new RecipesDataBase().updateRecipe(
+        await new RecipesDataBase().updateRecipe(
             (Number(req.params.id)), req.body.newTitle, req.body.newDescription
         )
 

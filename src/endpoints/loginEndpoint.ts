@@ -9,13 +9,16 @@ export const loginEndpoint = async (req: Request, res: Response) => {
         if (!req.body.email || req.body.email.indexOf("@") === -1) {
             throw new Error("Invalid email");
         }
+        if (!req.body.password || req.body.password.length < 6) {
+            throw new Error("Password too short");
+        }
         const user = await new UserDatabase().getUserByEmail(req.body.email);
         const comparedResult = await new HashManager().compare(
             req.body.password,
             user.password
         );
         if (!comparedResult) {
-            throw new Error("Invalid password");
+            throw new Error("Invalid credentials");
         }
         const token = new Authenticator().generateToken({
             id: user.id,

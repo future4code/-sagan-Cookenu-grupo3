@@ -2,20 +2,12 @@ import { Request, Response } from "express";
 import { UserDatabase } from "../data/UserDataBase";
 import { Authenticator } from "../services/Authenticator";
 
-
 export const followUserEndPoint = async (req: Request, res: Response) => {
     try {
         const token = req.headers.authorization as string;
+        const authenticationData = new Authenticator().getData(token);
 
-        const authenticator = new Authenticator()
-        const authenticationData = authenticator.getData(token);
-
-        const UsersFollow = {
-            follower_id: req.body.follower_id,
-        }
-
-        const followUser = new UserDatabase()
-        await followUser.followUser(authenticationData.id, UsersFollow.follower_id)
+        await new UserDatabase().followUser(authenticationData.id, req.body.follower_id)
 
         res.status(200).send({
             message: "Followed successfully"
