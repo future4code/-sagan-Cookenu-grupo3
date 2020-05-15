@@ -4,15 +4,15 @@ import { UserDatabase } from "../data/UserDataBase";
 import { Authenticator } from "../services/Authenticator";
 
 
-export const getOtherProfileEndPoint =  async (req: Request, res: Response) => {
+export const getOtherProfileEndPoint = async (req: Request, res: Response) => {
     try {
         const token = req.headers.authorization as string;
 
         const authenticator = new Authenticator()
         const authenticationData = authenticator.getData(token);
 
-        
-        
+
+
         const userId = req.params.id
         const userDatabase = new UserDatabase();
         const user = await userDatabase.getOtherProfile(userId);
