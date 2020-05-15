@@ -13,7 +13,7 @@ export const deleteRecipeEndPoint = async (req: Request, res: Response) => {
         console.log(recipeOwner != userData.id)
         console.log(userData.role)
         console.log(userData.role != "admin")
-        if((recipeOwner != userData.id) || (userData.role == "admin")){
+        if ((recipeOwner != userData.id) || (userData.role == "admin")) {
             throw new Error("Você precisa ser o criador da receita ou um administrador para poder remove-la")
         }
         const deleteRecipe = await new RecipesDataBase().deleteRecipe(Number(req.params.id))

@@ -4,7 +4,7 @@ import { UserDatabase } from "../data/UserDataBase";
 import { Authenticator } from "../services/Authenticator";
 
 
-export const getOwnProfileEndPoint =  async (req: Request, res: Response) => {
+export const getOwnProfileEndPoint = async (req: Request, res: Response) => {
     try {
         const token = req.headers.authorization as string;
 
@@ -14,7 +14,7 @@ export const getOwnProfileEndPoint =  async (req: Request, res: Response) => {
         if (authenticationData.role !== "normal") {
             throw new Error("Unauthorized")
         }
-        
+
         const userDatabase = new UserDatabase();
         const user = await userDatabase.getOwnProfile(authenticationData.id);
 
