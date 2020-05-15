@@ -55,4 +55,18 @@ export class UserDatabase extends BaseDatabase {
                 followed_id
             }).into("FollowUsers");
     }
+    public async deleteFollowUser(follower_id: string, followed_id: string): Promise<any> {
+        await this.getConnection()
+            .delete()
+            .from("FollowUsers")
+            .where({ follower_id, followed_id })
+
+    };
+    public async deleteUser(id: string): Promise<any> {
+        await this.getConnection()
+            .delete()
+            .from(UserDatabase.TABLE_NAME)
+            .where({ id })
+    };
+
 }
