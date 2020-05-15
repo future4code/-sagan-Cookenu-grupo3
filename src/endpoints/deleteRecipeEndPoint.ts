@@ -3,17 +3,20 @@ import { Authenticator } from "../services/Authenticator";
 import { BaseDatabase } from "../data/BaseDataBase";
 import { RecipesDataBase } from "../data/RecipesDataBase";
 
-export const editRecipeEndPoint = async (req: Request, res: Response) => {
+export const deleteRecipeEndPoint = async (req: Request, res: Response) => {
     try {
         const token = req.headers.authorization as string;
         const userData = await new Authenticator().getData(token);
         const recipeOwner = await new RecipesDataBase().getRecipeCreatorByRecipeId(Number(req.params.id))
-        if (recipeOwner != userData.id) {
-            throw new Error("Você precisa ser o criador da receita para poder atualiza-la.")
+        console.log(userData.id)
+        console.log(recipeOwner)
+        console.log(recipeOwner != userData.id)
+        console.log(userData.role)
+        console.log(userData.role != "admin")
+        if ((recipeOwner != userData.id) || (userData.role == "admin")) {
+            throw new Error("Você precisa ser o criador da receita ou um administrador para poder remove-la")
         }
-        const updateRecipe = await new RecipesDataBase().updateRecipe(
-            (Number(req.params.id)), req.body.newTitle, req.body.newDescription
-        )
+        const deleteRecipe = await new RecipesDataBase().deleteRecipe(Number(req.params.id))
 
         res.sendStatus(200)
     } catch (err) {

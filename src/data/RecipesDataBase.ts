@@ -63,9 +63,16 @@ export class RecipesDataBase extends BaseDatabase {
     }
 
     public async getRecipeCreatorByRecipeId(recipeId: number): Promise<string> {
-            const recipeCreator = await this.getConnection().raw(`
+        const recipeCreator = await this.getConnection().raw(`
             SELECT creator_id FROM ${BaseDatabase.RECIPES_TABLE_NAME} WHERE recipe_id = ${recipeId};
         `)
-        return recipeCreator[0][0]
-}
+        return recipeCreator[0][0].creator_id
+    }
+
+    public async deleteRecipe(recipeId: number): Promise<void> {
+        await this.getConnection().raw(`
+            DELETE FROM ${BaseDatabase.RECIPES_TABLE_NAME}
+            WHERE recipe_id = ${recipeId};
+        `)
+    }
 }
