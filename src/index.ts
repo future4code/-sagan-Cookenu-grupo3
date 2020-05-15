@@ -14,6 +14,7 @@ import { getRecipeEndPoint } from "./endpoints/getRecipeEndPoint";
 import { feedEndPoint } from "./endpoints/feedEndPoint";
 import { followUserEndPoint } from "./endpoints/followUserEndpoint";
 import { unfolowUserEndPoint } from "./endpoints/unfollowUserEndpoint";
+import { editRecipeEndPoint } from "./endpoints/editRecipeEndPoint";
 
 const app = express();
 app.use(express.json());
@@ -29,6 +30,7 @@ app.get("/user/:id", getOtherProfileEndPoint)
 app.post("/recipes/create", createRecipeEndPoint)
 app.get("/recipes/:id", getRecipeEndPoint)
 app.get("/user/feed", feedEndPoint)
+app.put("/recipes/edit/:id", editRecipeEndPoint)
 
 
 const server = app.listen(process.env.PORT || 3000, () => {
