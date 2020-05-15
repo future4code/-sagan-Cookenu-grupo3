@@ -28,12 +28,28 @@ export class UserDatabase extends BaseDatabase {
         return result[0];
     }
 
-    public async getUserById(id: string): Promise<any> {
+    public async getOwnProfile(id: string): Promise<any> {
         const result = await this.getConnection()
             .select("*")
             .from(BaseDatabase.USERS_TABLE_NAME)
             .where({ id });
         return result[0];
+    }
+
+    public async getOtherProfile(id: string): Promise<any> {
+        const result = await this.getConnection()
+            .select("*")
+            .from(UserDatabase.TABLE_NAME)
+            .where({ id })
+
+        return result[0]
+    }
+    public async followUser(follower_id: string, followed_id: string): Promise<void> {
+        await this.getConnection()
+            .insert({
+                follower_id,
+                followed_id
+            }).into("FollowUsers");
     }
 
 }
