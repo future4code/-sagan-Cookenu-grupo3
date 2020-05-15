@@ -11,6 +11,7 @@ import { getRecipeEndPoint } from "./endpoints/getRecipeEndPoint";
 import { feedEndPoint } from "./endpoints/feedEndPoint";
 import { followUserEndPoint } from "./endpoints/followUserEndpoint";
 import { unfolowUserEndPoint } from "./endpoints/unfollowUserEndpoint";
+import { deleteUserEndPoint } from "./endpoints/deleteUserEndpoint";
 import { editRecipeEndPoint } from "./endpoints/editRecipeEndPoint";
 import { deleteRecipeEndPoint } from "./endpoints/deleteRecipeEndPoint";
 
@@ -21,6 +22,9 @@ app.post("/signup", signupEndPoint)
 app.post("/login", loginEndpoint)
 
 app.post("/user/follow", followUserEndPoint)
+
+app.delete("/user/delete/:id", deleteUserEndPoint)
+
 app.post("/user/unfollow", unfolowUserEndPoint)
 app.get("/user/profile", getOwnProfileEndPoint)
 app.get("/user/:id", getOtherProfileEndPoint)
