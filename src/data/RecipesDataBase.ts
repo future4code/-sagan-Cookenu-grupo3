@@ -42,5 +42,30 @@ export class RecipesDataBase extends BaseDatabase {
             `)
         return result[0][0];
     }
-}
 
+    public async updateRecipe(recipeId: number, newTitle?: string, newDescription?: string): Promise<void> {
+        if (newTitle) {
+            await this.getConnection().raw(`
+            UPDATE ${BaseDatabase.RECIPES_TABLE_NAME}
+            SET
+            recipe_title = "${newTitle}"
+            WHERE recipe_id = ${recipeId};
+        `)
+        }
+        if (newDescription) {
+            await this.getConnection().raw(`
+            UPDATE ${BaseDatabase.RECIPES_TABLE_NAME}
+            SET
+            recipe_description = "${newDescription}"
+            WHERE recipe_id = ${recipeId};
+        `)
+        }
+    }
+
+    public async getRecipeCreatorByRecipeId(recipeId: number): Promise<string> {
+            const recipeCreator = await this.getConnection().raw(`
+            SELECT creator_id FROM ${BaseDatabase.RECIPES_TABLE_NAME} WHERE recipe_id = ${recipeId};
+        `)
+        return recipeCreator[0][0]
+}
+}
