@@ -5,7 +5,7 @@ export abstract class BaseDatabase {
     private static connection: Knex | null = null;
     protected static RECIPES_TABLE_NAME = "Cookenu_recipes";
     protected static USERS_TABLE_NAME = "Cookenu_user";
-    protected static FOLLOWS_TABLE_NAME = "FollowUsers";
+    protected static FOLLOWS_TABLE_NAME = "Cookenu_followUsers";
 
     protected getConnection(): Knex {
         if (BaseDatabase.connection === null) {
