@@ -1,9 +1,6 @@
-import knex from "knex";
 import { BaseDatabase } from "./BaseDataBase";
 
 export class UserDatabase extends BaseDatabase {
-    private static TABLE_NAME = "Cookenu_user";
-
     public async createUser(
         id: string,
         name: string,
@@ -19,13 +16,13 @@ export class UserDatabase extends BaseDatabase {
                 password,
                 role
             })
-            .into(UserDatabase.TABLE_NAME);
+            .into(BaseDatabase.USERS_TABLE_NAME);
     }
 
     public async getUserByEmail(email: string): Promise<any> {
         const result = await this.getConnection()
             .select("*")
-            .from(UserDatabase.TABLE_NAME)
+            .from(BaseDatabase.USERS_TABLE_NAME)
             .where({ email });
 
         return result[0];
@@ -34,10 +31,9 @@ export class UserDatabase extends BaseDatabase {
     public async getOwnProfile(id: string): Promise<any> {
         const result = await this.getConnection()
             .select("*")
-            .from(UserDatabase.TABLE_NAME)
-            .where({ id })
-
-        return result[0]
+            .from(BaseDatabase.USERS_TABLE_NAME)
+            .where({ id });
+        return result[0];
     }
 
     public async getOtherProfile(id: string): Promise<any> {
@@ -55,4 +51,5 @@ export class UserDatabase extends BaseDatabase {
                 followed_id
             }).into("FollowUsers");
     }
+
 }
