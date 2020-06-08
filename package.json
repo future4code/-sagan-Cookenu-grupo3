@@ -1,0 +1,46 @@
+{
+  "name": "grupo3",
+  "version": "1.0.0",
+  "description": "projeto backend grupo3 labenu cookenu",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "ts-node-dev ./src/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/future4code/sagan-Cookenu-grupo3.git"
+  },
+  "keywords": [
+    "labenu",
+    "sagan",
+    "projeto",
+    "cookenu",
+    "grupo3",
+    "marina",
+    "eduardo"
+  ],
+  "author": "Eduardo Costa e Marina Isabel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/future4code/sagan-Cookenu-grupo3/issues"
+  },
+  "homepage": "https://github.com/future4code/sagan-Cookenu-grupo3#readme",
+  "dependencies": {
+    "@types/bcryptjs": "^2.4.2",
+    "@types/express": "^4.17.0",
+    "@types/jsonwebtoken": "^8.3.9",
+    "@types/knex": "^0.16.1",
+    "@types/node": "^14.0.1",
+    "@types/uuid": "^7.0.3",
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.0",
+    "jsonwebtoken": "^8.5.1",
+    "knex": "^0.21.1",
+    "mysql": "^2.18.1",
+    "ts-node-dev": "^1.0.0-pre.44",
+    "typescript": "^3.9.2",
+    "uuid": "^8.0.0"
+  }
+}
